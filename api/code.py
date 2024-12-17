@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from fastapi.responses import RedirectResponse
 
 router = APIRouter(prefix="/code", tags=["code"])
 
@@ -16,3 +17,13 @@ def created():
 @router.get("/no-content", status_code=204)
 def no_content():
     return {"status": 204}
+
+
+@router.get("/move-permanently", response_class=RedirectResponse, status_code=301)
+def move_permanently():
+    return "/"
+
+
+@router.get("/found", response_class=RedirectResponse, status_code=302)
+def found():
+    return "https://example.com"
